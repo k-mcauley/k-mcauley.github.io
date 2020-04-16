@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Markdown Examples Part 3 - Trainee Projects</title>
+    <title>pandas - Trainee Projects</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,22 +9,16 @@
 
 
 
-<link rel="canonical" href="/articles/2020/04/03/markdown-examples-part-3/">
 
-        <meta name="author" content="Kieran McAuley" />
-        <meta name="keywords" content="markdown,pygments" />
-        <meta name="description" content="Code blocks are preceeded by an indent, three : symbols and the name of the language. All of the following code will be highlighted while the text is indented. def do_twice(func): def wrapper_do_twice(*args, **kwargs): return func(*args, **kwargs).lower() return wrapper_do_twice @do_twice def say_whee(some_text): print(some_text) x = &#39;Whee …" />
+    <meta name="author" content="Kieran McAuley" />
+    <meta name="keywords" content="pandas" />
 
+    <!-- Open Graph tags -->
         <meta property="og:site_name" content="Trainee Projects" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Markdown Examples Part 3"/>
-        <meta property="og:url" content="/articles/2020/04/03/markdown-examples-part-3/"/>
-        <meta property="og:description" content="Code blocks are preceeded by an indent, three : symbols and the name of the language. All of the following code will be highlighted while the text is indented. def do_twice(func): def wrapper_do_twice(*args, **kwargs): return func(*args, **kwargs).lower() return wrapper_do_twice @do_twice def say_whee(some_text): print(some_text) x = &#39;Whee …"/>
-        <meta property="article:published_time" content="2020-04-03" />
-            <meta property="article:section" content="blogging" />
-            <meta property="article:tag" content="markdown" />
-            <meta property="article:tag" content="pygments" />
-            <meta property="article:author" content="Kieran McAuley" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Trainee Projects"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="Trainee Projects"/>
 
 
 
@@ -38,8 +32,7 @@
         <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Trainee Projects ATOM Feed"/>
 
-        <link href="/feeds/blogging.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Trainee Projects blogging ATOM Feed"/>
+
 </head>
 <body>
 
@@ -60,7 +53,7 @@ Trainee Projects            </a>
                          <li><a href="/pages/about-me/">
                              About Me
                           </a></li>
-                        <li class="active">
+                        <li >
                             <a href="/category/blogging">Blogging</a>
                         </li>
                         <li >
@@ -84,55 +77,14 @@ Trainee Projects            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/articles/2020/04/03/markdown-examples-part-3/"
-                       rel="bookmark"
-                       title="Permalink to Markdown Examples Part 3">
-                        Markdown Examples Part 3
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2020-04-03T00:00:00+01:00"> Fri 03 April 2020</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/markdown">markdown</a>
-        /
-	<a href="/tag/pygments">pygments</a>
-    
-</footer><!-- /.post-info -->                    </div>
+            <article>
+                <h2><a href="/articles/2020/04/14/data-analysis-with-pandas/">Data Analysis with pandas</a></h2>
+                <div class="summary"><h1>Introduction to Data Analysis with pandas</h1>
+<p>To become familiarised with the <strong>pandas library</strong> for use in analysis of data I undertook this small project. As most data seen clinically from previous reports and new dose monitoring software will collate data in a <em>.csv</em> or <em>.dat</em> file, I examined methods of …</p>
+                    <a class="btn btn-default btn-xs" href="/articles/2020/04/14/data-analysis-with-pandas/">more ...</a>
                 </div>
-                <p>Code blocks are preceeded by an indent, three : symbols and the name of the language.<br/>
-All of the following code will be highlighted while the text is indented.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">do_twice</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-<span class="k">def</span> <span class="nf">wrapper_do_twice</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="k">return</span> <span class="n">wrapper_do_twice</span>
-
-<span class="nd">@do_twice</span>
-<span class="k">def</span> <span class="nf">say_whee</span><span class="p">(</span><span class="n">some_text</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">some_text</span><span class="p">)</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="s1">'Whee!'</span>
-<span class="n">say_whee</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
+            </article>
+            <hr/>
 
         </div>
         <div class="col-sm-3" id="sidebar">

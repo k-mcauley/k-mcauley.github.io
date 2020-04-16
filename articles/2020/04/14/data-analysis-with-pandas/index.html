@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Data Analysis with pandas - Trainee Projects</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/articles/2020/04/14/data-analysis-with-pandas/">
+
+        <meta name="author" content="Kieran McAuley" />
+        <meta name="keywords" content="pandas,data analysis,python" />
+        <meta name="description" content="Introduction to Data Analysis with pandas To become familiarised with the pandas library for use in analysis of data I undertook this small project. As most data seen clinically from previous reports and new dose monitoring software will collate data in a .csv or .dat file, I examined methods of …" />
+
+        <meta property="og:site_name" content="Trainee Projects" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Data Analysis with pandas"/>
+        <meta property="og:url" content="/articles/2020/04/14/data-analysis-with-pandas/"/>
+        <meta property="og:description" content="Introduction to Data Analysis with pandas To become familiarised with the pandas library for use in analysis of data I undertook this small project. As most data seen clinically from previous reports and new dose monitoring software will collate data in a .csv or .dat file, I examined methods of …"/>
+        <meta property="article:published_time" content="2020-04-14" />
+            <meta property="article:section" content="blogging" />
+            <meta property="article:tag" content="pandas" />
+            <meta property="article:tag" content="data analysis" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:author" content="Kieran McAuley" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Trainee Projects ATOM Feed"/>
+
+        <link href="/feeds/blogging.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Trainee Projects blogging ATOM Feed"/>
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Trainee Projects            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me/">
+                             About Me
+                          </a></li>
+                        <li class="active">
+                            <a href="/category/blogging">Blogging</a>
+                        </li>
+                        <li >
+                            <a href="/category/introduction">Introduction</a>
+                        </li>
+                        <li >
+                            <a href="/category/portfolio-post">Portfolio post</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/articles/2020/04/14/data-analysis-with-pandas/"
+                       rel="bookmark"
+                       title="Permalink to Data Analysis with pandas">
+                        Data Analysis with pandas
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2020-04-14T00:00:00+01:00"> Tue 14 April 2020</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/pandas">pandas</a>
+        /
+	<a href="/tag/data-analysis">data analysis</a>
+        /
+	<a href="/tag/python">python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h1>Introduction to Data Analysis with pandas</h1>
+<p>To become familiarised with the <strong>pandas library</strong> for use in analysis of data I undertook this small project. As most data seen clinically from previous reports and new dose monitoring software will collate data in a <em>.csv</em> or <em>.dat</em> file, I examined methods of pulling this data to python utilising pandas. </p>
+<h2>Formatting data</h2>
+<hr/>
+<p>Data obtained from the Met Office Hadley Centre Central England Temperature Data reserve (1772-present), available at Met Office <a href="https://www.metoffice.gov.uk/hadobs/hadcet/data/download.html">downloads</a>, was used in this analysis. </p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">"C:/Users/Kieran/Pandas tutorial/cetml1659on.dat"</span><span class="p">,</span>
+    <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="c1">#only numerical data remains</span>
+    <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># whitespace separated sep='\s+'</span>
+    <span class="c1"># unrecorded years use variation of -99 as placeholder</span>
+    <span class="c1"># must be removed</span>
+    <span class="c1"># df[df &lt; -50] = None (alternative method)</span>
+    <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">'-99.9'</span><span class="p">,</span> <span class="s1">'-99.99'</span><span class="p">]</span> 
+<span class="p">)</span> 
+<span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span> <span class="c1">#display end of dataset</span>
+</pre></div>
+<p>By examining the average temperature (<span class="math">\(^\circ\)</span>C) of each year, the following plot was obtained:</p>
+<p><img alt="Year_Temp" src="/img/average_year.png" style="width: 528px; height: auto; max-width: 100%;"/></p>
+<p>While this data does show an obvious increase in the average temperature (<span class="math">\(^\circ\)</span>C) by year, a clearer result could be obtained by grouping the data.</p>
+<h2>Groupby module</h2>
+<hr/>
+<p>String manipulation was performed to generate a new column titled 'decade'. Using the groupby module, the mean temperature of each decade was obtained. </p>
+<div class="highlight"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">decade</span> <span class="o">=</span> <span class="n">years</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="s1">'0'</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">]</span> <span class="o">=</span> <span class="n">decade</span>
+<span class="n">by_decade</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'decade'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+<p>Plotting the average temperatures by decade produces the following figure: </p>
+<p><img alt="Average Temperature by Decade" src="/img/average_decade.png" style="width: 528px; height: auto; max-width: 100%;"/></p>
+<p>The results obtained by grouping the data by decade have become considerably clearer. The manipulation of the data was also quite minimal.</p>
+<h2>Annotation module</h2>
+<hr/>
+<p>As annotation within python can become complex, the year plot was used to test certain aspects of annotating figures. The plots of January and June average temperatures by year were included. The aim was to annotate the year which contained the January with highest average temperature ("Warmest Winter"). </p>
+<div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1">#plotting various average annual and monthly temps</span>
+<span class="n">year_plot</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'JAN'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"steelblue"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">year_plot</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'JUN'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"firebrick"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">year_plot</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'YEAR'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">year_plot</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Average Temperature ($^\circ$C)"</span><span class="p">)</span>
+<span class="n">year_plot</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Year"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">)</span>
+<span class="n">year_plot</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'-'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="c1">#LaTex required for use of symbols</span>
+<span class="n">year_plot</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Average Temperature ($^\circ$C) vs. Year"</span><span class="p">)</span>
+
+<span class="c1"># Return index of first occurrence of maximum over requested axis</span>
+<span class="n">warm_winter_year</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'JAN'</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="n">warm_winter_temp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'JAN'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">'Warmest winter'</span><span class="p">,</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">warm_winter_year</span><span class="p">,</span> <span class="n">warm_winter_temp</span><span class="p">),</span> <span class="n">xycoords</span><span class="o">=</span><span class="s1">'data'</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">+</span><span class="mi">30</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s1">'offset points'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">connectionstyle</span><span class="o">=</span><span class="s2">"arc3,rad=-.2"</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+<p>This considerable block of code produced the annotated figure displayed below:</p>
+<p><img alt="Annotation Example" src="/img/annotation.png" style="width: 515px; height: auto; max-width: 100%;"/></p>
+<h2>Conclusions</h2>
+<hr/>
+<p>The above data all appear to show a local increase of the average temperatures by year and decade. This would be expected, as we know there is a global increase in the average temperatures observed worldwide.</p>
+<p>The use of python in selection and manipulation in this data analysis was quite simple and removed the need for manual manipulation of data compared to another available software. Although the <em>annotation module</em> commonly used to annotate figures can be difficult to implement and may produce large blocks of code, the results are markedly better than what can be achivived in programs such as <strong>Excel</strong>. </p>
+<p>Future work to improve this analysis should examine areas such as error analysis with python and further annotation examples. </p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://linkedin.com/in/kieran-mcauley"><i class="fa fa-linkedin-square fa-lg"></i> Linkedin</a></li>
+    <li class="list-group-item"><a href="https://github.com/k-mcauley"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="https://aapm.org" target="_blank">AAPM</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://iapm.ie/" target="_blank">IAPM</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2020 Kieran McAuley
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

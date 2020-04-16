@@ -49,17 +49,17 @@ This text is &lt;strong&gt;&lt;em&gt;italic and bold&lt;/em&gt;&lt;/strong&gt;&l
 &lt;td&gt;Value 9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="Introduction"></category><category term="markdown"></category></entry><entry><title>Markdown Examples Part 2</title><link href="/articles/2020/04/03/markdown-examples-part-2/" rel="alternate"></link><published>2020-04-03T00:00:00+01:00</published><updated>2020-04-03T00:00:00+01:00</updated><author><name>Kieran McAuley</name></author><id>tag:None,2020-04-03:/articles/2020/04/03/markdown-examples-part-2/</id><summary type="html">&lt;p&gt;Images can be displayed in Markdown.&lt;br&gt;
-Text within the square brackets is the image name. The path to the image goes between the round brackets.&lt;br&gt;
+&lt;/table&gt;</content><category term="Introduction"></category><category term="markdown"></category></entry><entry><title>Markdown Examples Part 2</title><link href="/articles/2020/04/03/markdown-examples-part-2/" rel="alternate"></link><published>2020-04-03T00:00:00+01:00</published><updated>2020-04-03T00:00:00+01:00</updated><author><name>Kieran McAuley</name></author><id>tag:None,2020-04-03:/articles/2020/04/03/markdown-examples-part-2/</id><summary type="html">&lt;p&gt;Images can be displayed in Markdown.&lt;br/&gt;
+Text within the square brackets is the image name. The path to the image goes between the round brackets.&lt;br/&gt;
 The {static} tag indicates the image is stored in the content folder. This setting can be changed in pelicanconf.py.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="python logo" src="/img/python_icon.png"&gt;&lt;/p&gt;
-&lt;p&gt;Links to downloadable content such …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Images can be displayed in Markdown.&lt;br&gt;
-Text within the square brackets is the image name. The path to the image goes between the round brackets.&lt;br&gt;
+&lt;p&gt;&lt;img alt="python logo" src="/img/python_icon.png" style="width: 2000px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;Links to downloadable content such …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Images can be displayed in Markdown.&lt;br/&gt;
+Text within the square brackets is the image name. The path to the image goes between the round brackets.&lt;br/&gt;
 The {static} tag indicates the image is stored in the content folder. This setting can be changed in pelicanconf.py.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="python logo" src="/img/python_icon.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="python logo" src="/img/python_icon.png" style="width: 2000px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
 &lt;p&gt;Links to downloadable content such as PDF files are written similarly to image files but with no ! symbol at the beginning.&lt;/p&gt;
 &lt;p&gt;&lt;a href="/pdf/pelican.pdf"&gt;Pelican Documenation&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;A link to a different blog post on our website is written exactly the same.&lt;br&gt;
+&lt;p&gt;A link to a different blog post on our website is written exactly the same.&lt;br/&gt;
 Text within the square brackets can be clicked on to travel to the website between the curly brackets.
 The {filename} tag indicates we want to follow the link to a webpage rather than the static file it was generated from.&lt;/p&gt;
 &lt;p&gt;&lt;a href="/articles/2020/04/03/my-first-post/"&gt;First Post&lt;/a&gt;&lt;/p&gt;
