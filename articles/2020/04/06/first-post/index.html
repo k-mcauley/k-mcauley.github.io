@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>First Post - Kieran's website</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+
+<link rel="canonical" href="/articles/2020/04/06/first-post/">
+
+        <meta name="author" content="Kieran McAuley" />
+        <meta name="keywords" content="jupyter notebook,python,cellular automata" />
+        <meta name="description" content="Jupyter Notebook example¶ This is a previously written python code in a jupyter notebook to test its implementation on the site. In [2]: &#34;&#34;&#34; Created on Fri Nov 25 19:23:20 2016 @author: Kieran &#34;&#34;&#34; import numpy as np import matplotlib.pyplot as plt import matplotlib.animation as animation N = 100 …" />
+
+        <meta property="og:site_name" content="Kieran's website" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="First Post"/>
+        <meta property="og:url" content="/articles/2020/04/06/first-post/"/>
+        <meta property="og:description" content="Jupyter Notebook example¶ This is a previously written python code in a jupyter notebook to test its implementation on the site. In [2]: &#34;&#34;&#34; Created on Fri Nov 25 19:23:20 2016 @author: Kieran &#34;&#34;&#34; import numpy as np import matplotlib.pyplot as plt import matplotlib.animation as animation N = 100 …"/>
+        <meta property="article:published_time" content="2020-04-06" />
+            <meta property="article:section" content="portfolio post" />
+            <meta property="article:tag" content="jupyter notebook" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="cellular automata" />
+            <meta property="article:author" content="Kieran McAuley" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Kieran's website ATOM Feed"/>
+
+        <link href="/feeds/portfolio-post.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Kieran's website portfolio post ATOM Feed"/>
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Kieran's website            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me/">
+                             About Me
+                          </a></li>
+                        <li >
+                            <a href="/category/blogging">Blogging</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/portfolio-post">Portfolio post</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/articles/2020/04/06/first-post/"
+                       rel="bookmark"
+                       title="Permalink to First Post">
+                        First Post
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2020-04-06T00:00:00+01:00"> Mon 06 April 2020</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/jupyter-notebook">jupyter notebook</a>
+        /
+	<a href="/tag/python">python</a>
+        /
+	<a href="/tag/cellular-automata">cellular automata</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Jupyter-Notebook-example">Jupyter Notebook example<a class="anchor-link" href="#Jupyter-Notebook-example">¶</a></h1><hr/>
+<p>This is a previously written python code in a jupyter notebook to test its implementation on the site.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="sd">"""</span>
+<span class="sd">Created on Fri Nov 25 19:23:20 2016</span>
+
+<span class="sd">@author: Kieran</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">ON</span> <span class="o">=</span> <span class="mi">255</span>
+<span class="n">OFF</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">ON</span><span class="p">,</span> <span class="n">OFF</span><span class="p">]</span>
+
+<span class="c1"># populate grid with random on/off - more off than on</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+  <span class="k">global</span> <span class="n">grid</span>
+  <span class="c1"># copy grid since we require 8 neighbors for calculation</span>
+  <span class="c1"># and we go line by line </span>
+  <span class="n">newGrid</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+      <span class="c1"># compute 8-neghbor sum </span>
+      <span class="c1"># using toroidal boundary conditions - x and y wrap around </span>
+      <span class="c1"># so that the simulaton takes place on a toroidal surface.</span>
+      <span class="n">total</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">]</span> <span class="o">+</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">]</span> <span class="o">+</span> 
+               <span class="n">grid</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">grid</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> 
+               <span class="n">grid</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">]</span> <span class="o">+</span> <span class="n">grid</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">]</span> <span class="o">+</span> 
+               <span class="n">grid</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">]</span> <span class="o">+</span> <span class="n">grid</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">])</span><span class="o">/</span><span class="mi">255</span>
+      <span class="c1"># apply Conway's rules</span>
+      <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>  <span class="o">==</span> <span class="n">ON</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">total</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">total</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">):</span>
+          <span class="n">newGrid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">OFF</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+          <span class="n">newGrid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ON</span>
+  <span class="c1"># update data</span>
+  <span class="n">mat</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">newGrid</span><span class="p">)</span>
+  <span class="n">grid</span> <span class="o">=</span> <span class="n">newGrid</span>
+  <span class="k">return</span> <span class="p">[</span><span class="n">mat</span><span class="p">]</span>
+
+<span class="c1"># set up animation</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">mat</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                              <span class="n">save_count</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_svg output_subarea">
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<!-- Created with matplotlib (https://matplotlib.org/) -->
+<svg height="252.018125pt" version="1.1" viewbox="0 0 251.565 252.018125" width="251.565pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">
+*{stroke-linecap:butt;stroke-linejoin:round;}
+  </style>
+</defs>
+<g id="figure_1">
+<g id="patch_1">
+<path d="M 0 252.018125 
+L 251.565 252.018125 
+L 251.565 0 
+L 0 0 
+z
+" style="fill:none;"></path>
+</g>
+<g id="axes_1">
+<g id="patch_2">
+<path d="M 26.925 241.318125 
+L 244.365 241.318125 
+L 244.365 23.878125 
+L 26.925 23.878125 
+z
+" style="fill:#ffffff;"></path>
+</g>
+<g clip-path="url(#p24eecfb822)">
+<image height="218" id="image690ae0dd21" transform="scale(1 -1)translate(0 -218)" width="218" x="26.925" xlink:href="data:image/png;base64,
+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" y="-23.318125"/>
+</g>
+<g id="matplotlib.axis_1">
+<g id="xtick_1">
+<g id="line2d_1">
+<defs>
+<path d="M 0 0 
+L 0 3.5 
+" id="m202d8a600a" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.0122" xlink:href="#m202d8a600a" y="241.318125"></use>
+</g>
+</g>
+<g id="line2d_2">
+<defs>
+<path d="M 0 0 
+L 0 -3.5 
+" id="m9ef04ba341" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.0122" xlink:href="#m9ef04ba341" y="23.878125"></use>
+</g>
+</g>
+<g id="text_1">
+<!-- 0 -->
+<defs>
+<path d="M 31.78125 66.40625 
+Q 24.171875 66.40625 20.328125 58.90625 
+Q 16.5 51.421875 16.5 36.375 
+Q 16.5 21.390625 20.328125 13.890625 
+Q 24.171875 6.390625 31.78125 6.390625 
+Q 39.453125 6.390625 43.28125 13.890625 
+Q 47.125 21.390625 47.125 36.375 
+Q 47.125 51.421875 43.28125 58.90625 
+Q 39.453125 66.40625 31.78125 66.40625 
+z
+M 31.78125 74.21875 
+Q 44.046875 74.21875 50.515625 64.515625 
+Q 56.984375 54.828125 56.984375 36.375 
+Q 56.984375 17.96875 50.515625 8.265625 
+Q 44.046875 -1.421875 31.78125 -1.421875 
+Q 19.53125 -1.421875 13.0625 8.265625 
+Q 6.59375 17.96875 6.59375 36.375 
+Q 6.59375 54.828125 13.0625 64.515625 
+Q 19.53125 74.21875 31.78125 74.21875 
+z
+" id="DejaVuSans-48"></path>
+</defs>
+<g transform="translate(24.83095 14.798438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_2">
+<g id="line2d_3">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="71.5002" xlink:href="#m202d8a600a" y="241.318125"></use>
+</g>
+</g>
+<g id="line2d_4">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="71.5002" xlink:href="#m9ef04ba341" y="23.878125"></use>
+</g>
+</g>
+<g id="text_2">
+<!-- 20 -->
+<defs>
+<path d="M 19.1875 8.296875 
+L 53.609375 8.296875 
+L 53.609375 0 
+L 7.328125 0 
+L 7.328125 8.296875 
+Q 12.9375 14.109375 22.625 23.890625 
+Q 32.328125 33.6875 34.8125 36.53125 
+Q 39.546875 41.84375 41.421875 45.53125 
+Q 43.3125 49.21875 43.3125 52.78125 
+Q 43.3125 58.59375 39.234375 62.25 
+Q 35.15625 65.921875 28.609375 65.921875 
+Q 23.96875 65.921875 18.8125 64.3125 
+Q 13.671875 62.703125 7.8125 59.421875 
+L 7.8125 69.390625 
+Q 13.765625 71.78125 18.9375 73 
+Q 24.125 74.21875 28.421875 74.21875 
+Q 39.75 74.21875 46.484375 68.546875 
+Q 53.21875 62.890625 53.21875 53.421875 
+Q 53.21875 48.921875 51.53125 44.890625 
+Q 49.859375 40.875 45.40625 35.40625 
+Q 44.1875 33.984375 37.640625 27.21875 
+Q 31.109375 20.453125 19.1875 8.296875 
+z
+" id="DejaVuSans-50"></path>
+</defs>
+<g transform="translate(65.1377 14.798438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_3">
+<g id="line2d_5">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="114.9882" xlink:href="#m202d8a600a" y="241.318125"></use>
+</g>
+</g>
+<g id="line2d_6">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="114.9882" xlink:href="#m9ef04ba341" y="23.878125"></use>
+</g>
+</g>
+<g id="text_3">
+<!-- 40 -->
+<defs>
+<path d="M 37.796875 64.3125 
+L 12.890625 25.390625 
+L 37.796875 25.390625 
+z
+M 35.203125 72.90625 
+L 47.609375 72.90625 
+L 47.609375 25.390625 
+L 58.015625 25.390625 
+L 58.015625 17.1875 
+L 47.609375 17.1875 
+L 47.609375 0 
+L 37.796875 0 
+L 37.796875 17.1875 
+L 4.890625 17.1875 
+L 4.890625 26.703125 
+z
+" id="DejaVuSans-52"></path>
+</defs>
+<g transform="translate(108.6257 14.798438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-52"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_4">
+<g id="line2d_7">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="158.4762" xlink:href="#m202d8a600a" y="241.318125"></use>
+</g>
+</g>
+<g id="line2d_8">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="158.4762" xlink:href="#m9ef04ba341" y="23.878125"></use>
+</g>
+</g>
+<g id="text_4">
+<!-- 60 -->
+<defs>
+<path d="M 33.015625 40.375 
+Q 26.375 40.375 22.484375 35.828125 
+Q 18.609375 31.296875 18.609375 23.390625 
+Q 18.609375 15.53125 22.484375 10.953125 
+Q 26.375 6.390625 33.015625 6.390625 
+Q 39.65625 6.390625 43.53125 10.953125 
+Q 47.40625 15.53125 47.40625 23.390625 
+Q 47.40625 31.296875 43.53125 35.828125 
+Q 39.65625 40.375 33.015625 40.375 
+z
+M 52.59375 71.296875 
+L 52.59375 62.3125 
+Q 48.875 64.0625 45.09375 64.984375 
+Q 41.3125 65.921875 37.59375 65.921875 
+Q 27.828125 65.921875 22.671875 59.328125 
+Q 17.53125 52.734375 16.796875 39.40625 
+Q 19.671875 43.65625 24.015625 45.921875 
+Q 28.375 48.1875 33.59375 48.1875 
+Q 44.578125 48.1875 50.953125 41.515625 
+Q 57.328125 34.859375 57.328125 23.390625 
+Q 57.328125 12.15625 50.6875 5.359375 
+Q 44.046875 -1.421875 33.015625 -1.421875 
+Q 20.359375 -1.421875 13.671875 8.265625 
+Q 6.984375 17.96875 6.984375 36.375 
+Q 6.984375 53.65625 15.1875 63.9375 
+Q 23.390625 74.21875 37.203125 74.21875 
+Q 40.921875 74.21875 44.703125 73.484375 
+Q 48.484375 72.75 52.59375 71.296875 
+z
+" id="DejaVuSans-54"></path>
+</defs>
+<g transform="translate(152.1137 14.798438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-54"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_5">
+<g id="line2d_9">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="201.9642" xlink:href="#m202d8a600a" y="241.318125"></use>
+</g>
+</g>
+<g id="line2d_10">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="201.9642" xlink:href="#m9ef04ba341" y="23.878125"></use>
+</g>
+</g>
+<g id="text_5">
+<!-- 80 -->
+<defs>
+<path d="M 31.78125 34.625 
+Q 24.75 34.625 20.71875 30.859375 
+Q 16.703125 27.09375 16.703125 20.515625 
+Q 16.703125 13.921875 20.71875 10.15625 
+Q 24.75 6.390625 31.78125 6.390625 
+Q 38.8125 6.390625 42.859375 10.171875 
+Q 46.921875 13.96875 46.921875 20.515625 
+Q 46.921875 27.09375 42.890625 30.859375 
+Q 38.875 34.625 31.78125 34.625 
+z
+M 21.921875 38.8125 
+Q 15.578125 40.375 12.03125 44.71875 
+Q 8.5 49.078125 8.5 55.328125 
+Q 8.5 64.0625 14.71875 69.140625 
+Q 20.953125 74.21875 31.78125 74.21875 
+Q 42.671875 74.21875 48.875 69.140625 
+Q 55.078125 64.0625 55.078125 55.328125 
+Q 55.078125 49.078125 51.53125 44.71875 
+Q 48 40.375 41.703125 38.8125 
+Q 48.828125 37.15625 52.796875 32.3125 
+Q 56.78125 27.484375 56.78125 20.515625 
+Q 56.78125 9.90625 50.3125 4.234375 
+Q 43.84375 -1.421875 31.78125 -1.421875 
+Q 19.734375 -1.421875 13.25 4.234375 
+Q 6.78125 9.90625 6.78125 20.515625 
+Q 6.78125 27.484375 10.78125 32.3125 
+Q 14.796875 37.15625 21.921875 38.8125 
+z
+M 18.3125 54.390625 
+Q 18.3125 48.734375 21.84375 45.5625 
+Q 25.390625 42.390625 31.78125 42.390625 
+Q 38.140625 42.390625 41.71875 45.5625 
+Q 45.3125 48.734375 45.3125 54.390625 
+Q 45.3125 60.0625 41.71875 63.234375 
+Q 38.140625 66.40625 31.78125 66.40625 
+Q 25.390625 66.40625 21.84375 63.234375 
+Q 18.3125 60.0625 18.3125 54.390625 
+z
+" id="DejaVuSans-56"></path>
+</defs>
+<g transform="translate(195.6017 14.798438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-56"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="matplotlib.axis_2">
+<g id="ytick_1">
+<g id="line2d_11">
+<defs>
+<path d="M 0 0 
+L -3.5 0 
+" id="mc2b8f5796f" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="26.925" xlink:href="#mc2b8f5796f" y="24.965325"></use>
+</g>
+</g>
+<g id="text_6">
+<!-- 0 -->
+<g transform="translate(13.5625 28.764544)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_2">
+<g id="line2d_12">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="26.925" xlink:href="#mc2b8f5796f" y="68.453325"></use>
+</g>
+</g>
+<g id="text_7">
+<!-- 20 -->
+<g transform="translate(7.2 72.252544)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_3">
+<g id="line2d_13">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="26.925" xlink:href="#mc2b8f5796f" y="111.941325"></use>
+</g>
+</g>
+<g id="text_8">
+<!-- 40 -->
+<g transform="translate(7.2 115.740544)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-52"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_4">
+<g id="line2d_14">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="26.925" xlink:href="#mc2b8f5796f" y="155.429325"></use>
+</g>
+</g>
+<g id="text_9">
+<!-- 60 -->
+<g transform="translate(7.2 159.228544)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-54"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_5">
+<g id="line2d_15">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="26.925" xlink:href="#mc2b8f5796f" y="198.917325"></use>
+</g>
+</g>
+<g id="text_10">
+<!-- 80 -->
+<g transform="translate(7.2 202.716544)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-56"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="patch_3">
+<path d="M 26.925 241.318125 
+L 26.925 23.878125 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_4">
+<path d="M 244.365 241.318125 
+L 244.365 23.878125 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_5">
+<path d="M 26.925 241.318125 
+L 244.365 241.318125 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_6">
+<path d="M 26.925 23.878125 
+L 244.365 23.878125 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+</g>
+</g>
+<defs>
+<clippath id="p24eecfb822">
+<rect height="217.44" width="217.44" x="26.925" y="23.878125"></rect>
+</clippath>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://linkedin.com/in/kieran-mcauley"><i class="fa fa-linkedin-square fa-lg"></i> Linkedin</a></li>
+    <li class="list-group-item"><a href="https://github.com/k-mcauley"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group " id="tags">
+    <li class="list-group-item tag-1">
+      <a href="/tag/python">python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/jupyter-notebook">jupyter notebook</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/pandas">pandas</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/cellular-automata">cellular automata</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/sckit-image">sckit-image</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/scipy">scipy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/image-analysis">image analysis</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/data-analysis">data analysis</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="https://aapm.org" target="_blank">AAPM</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://iapm.ie/" target="_blank">IAPM</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2020 Kieran McAuley
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>

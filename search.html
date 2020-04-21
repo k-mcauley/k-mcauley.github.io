@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>data analysis - Kieran's website</title>
+    <title>Search - Kieran's website
+</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -174,8 +175,7 @@ init_mathjax();
 </script>
 
 
-    <meta name="author" content="Kieran McAuley" />
-    <meta name="keywords" content="data analysis" />
+        <meta name="author" content="Kieran McAuley" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Kieran's website" />
@@ -244,15 +244,7 @@ Kieran's website            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/articles/2020/04/14/data-analysis-with-pandas/">Data Analysis with pandas</a></h2>
-                <div class="summary"><h1><code>Introduction to Data Analysis with pandas</code></h1>
-<p>To become familiarised with the <strong>pandas library</strong> for use in analysis of data I undertook this small project. As most data seen clinically from previous reports and new dose monitoring software will collate data in a <em>.csv</em> or <em>.dat</em> file, I examined methods of …</p>
-                    <a class="btn btn-default btn-xs" href="/articles/2020/04/14/data-analysis-with-pandas/">more ...</a>
-                </div>
-            </article>
-            <hr/>
-
+<div id="tipue_search_content"></div>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
@@ -359,5 +351,16 @@ jQuery(document).ready(function($) {
 });
 });
 </script>
+    <script src="/tipuesearch_content.js"></script>
+    <script type="text/javascript" src="/theme/tipuesearch/tipuesearch_set.js"></script>
+    <script type="text/javascript" src="/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch({
+        'show': 10,
+        'newWindow': false
+      });
+    });
+    </script>
 </body>
 </html>

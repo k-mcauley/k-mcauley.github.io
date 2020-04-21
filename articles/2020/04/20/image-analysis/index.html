@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Image Analysis - Kieran's website</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+
+<link rel="canonical" href="/articles/2020/04/20/image-analysis/">
+
+        <meta name="author" content="Kieran McAuley" />
+        <meta name="keywords" content="sckit-image,scipy,image analysis,python" />
+        <meta name="description" content="Image Analysis using scipy and scikit-image In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. Images as numpy arrays Images are represented in scikit-image using standard numpy arrays. This allows maximum inter-operability with …" />
+
+        <meta property="og:site_name" content="Kieran's website" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Image Analysis"/>
+        <meta property="og:url" content="/articles/2020/04/20/image-analysis/"/>
+        <meta property="og:description" content="Image Analysis using scipy and scikit-image In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. Images as numpy arrays Images are represented in scikit-image using standard numpy arrays. This allows maximum inter-operability with …"/>
+        <meta property="article:published_time" content="2020-04-20" />
+            <meta property="article:section" content="blogging" />
+            <meta property="article:tag" content="sckit-image" />
+            <meta property="article:tag" content="scipy" />
+            <meta property="article:tag" content="image analysis" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:author" content="Kieran McAuley" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Kieran's website ATOM Feed"/>
+
+        <link href="/feeds/blogging.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Kieran's website blogging ATOM Feed"/>
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Kieran's website            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me/">
+                             About Me
+                          </a></li>
+                        <li class="active">
+                            <a href="/category/blogging">Blogging</a>
+                        </li>
+                        <li >
+                            <a href="/category/portfolio-post">Portfolio post</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/articles/2020/04/20/image-analysis/"
+                       rel="bookmark"
+                       title="Permalink to Image Analysis">
+                        Image Analysis
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2020-04-20T00:00:00+01:00"> Mon 20 April 2020</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/sckit-image">sckit-image</a>
+        /
+	<a href="/tag/scipy">scipy</a>
+        /
+	<a href="/tag/image-analysis">image analysis</a>
+        /
+	<a href="/tag/python">python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h1><code>Image Analysis using scipy and scikit-image</code></h1>
+<p>In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. </p>
+<h2>Images as numpy arrays</h2>
+<p>Images are represented in <code>scikit-image</code> using standard <code>numpy</code> arrays. This allows maximum inter-operability with other python libraries such as, <code>matplotlib</code> and <code>scipy</code>.</p>
+<p>A standard color image is a 3D array, where the last dimension has a size of 3 and contains information on the images red, grenn and blue channels (RGB). The following exmaple uses a sample image from the sckit-image module to demonstrate the attributes of an image array.</p>
+<div class="highlight"><pre><span></span>  <span class="p">:::</span><span class="n">python3</span>
+ <span class="c1"># loading standard libraries</span>
+ <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+ <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+ <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
+
+ <span class="n">cat</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">chelsea</span><span class="p">()</span>
+ <span class="c1"># obtain the image dimensions </span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">"Shape:"</span><span class="p">,</span> <span class="n">cat</span><span class="o">.</span><span class="kp">shape</span><span class="p">)</span>
+ <span class="c1">#obtaining the maximum array values</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">"Values min/max:"</span><span class="p">,</span> <span class="n">cat</span><span class="o">.</span><span class="kp">min</span><span class="p">(),</span> <span class="n">cat</span><span class="o">.</span><span class="kp">max</span><span class="p">())</span>
+
+ <span class="c1"># in python we can manipulate the values of the image arrays</span>
+ <span class="c1"># here a square portion is defined using the row and column co-ordinates of the image</span>
+ <span class="c1"># and the channel data is replaced with the darkest red shade available </span>
+ <span class="c1"># while setting the green and bluw values to zero</span>
+ <span class="n">cat</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">110</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">110</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># [red, green, blue]</span>
+ <span class="c1"># show the image array</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cat</span><span class="p">);</span>
+</pre></div>
+<p>The output of this code describes:</p>
+<p>The <strong>shape</strong> of the 3D array, we can inspect the number of rows and columns, as well as the number of color channels. Some image formats can contain additional channel filter data i.e infrared, etc. producing greater values.
+Shape: (300, 451, 3)</p>
+<p>There exist different conventions for representing image values, the most common are:</p>
+<p><em>Float64</em>: where  0 is black, 255 is white (0-255)</p>
+<p><em>uint8</em>: where  0 is black, 1 is white (0-1)</p>
+<p>Scipy allows any data-type as input, as long as the range is correct (<strong>0-1</strong> for floating point images, <strong>0-255</strong> for unsigned bytes, <strong>0-65535</strong> for unsigned 16-bit integers).</p>
+<p>The <strong>range</strong> of values contained in this image were found to be: 
+Values min/max: 0, 231
+It is clear this image was imput as an float64 data type,this could be easily converted if required.</p>
+<p>The resulting plot is displyed below:  </p>
+<p><img alt="cat" src="/img/cat.png" style="width: 490px; height: auto; max-width: 100%;"/> </p>
+<h2>Separation of color channels</h2>
+<hr/>
+<p>Using another sample image the separation of color can be performed quite simply, this may be useful in assessing the different channels of irraiated film using a pyton code.</p>
+<div class="highlight"><pre><span></span> <span class="n">image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">'../images/Bells-Beach.jpg'</span><span class="p">)</span>
+
+ <span class="c1"># each color channel assigned to a different variable</span>
+
+ <span class="n">r</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># 0 channel is red</span>
+ <span class="c1"># ... operator in array grabs all values until final array dimension</span>
+ <span class="n">g</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># 1 is green</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="c1"># 2 is blue</span>
+
+ <span class="c1"># plotting the image and r, g, b channels</span>
+ <span class="c1"># setting figure size </span>
+ <span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+ <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+ <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+
+ <span class="p">(</span><span class="n">ax_r</span><span class="p">,</span> <span class="n">ax_g</span><span class="p">,</span> <span class="n">ax_b</span><span class="p">,</span> <span class="n">ax_color</span><span class="p">)</span> <span class="o">=</span> <span class="n">axes</span>
+
+ <span class="c1"># set image to grey scale to view color dependency</span>
+ <span class="n">ax_r</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+ <span class="n">ax_r</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'red channel'</span><span class="p">)</span>
+
+ <span class="n">ax_g</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+ <span class="n">ax_g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'green channel'</span><span class="p">)</span>
+
+ <span class="n">ax_b</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+ <span class="n">ax_b</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'blue channel'</span><span class="p">)</span>
+
+ <span class="c1"># stack the R, G, and B layers using a numpy attribute</span>
+ <span class="n">ax_color</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+ <span class="n">ax_color</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'all channels'</span><span class="p">);</span>
+</pre></div>
+<p>The resulting plots are displayed below:  </p>
+<p><img alt="separation" src="/img/separation.png" style="width: 1210px; height: auto; max-width: 100%;"/> </p>
+<p>The lighter the areas in the individual images represent areas with the highest value for the corresponding channel. For example, the sea in the blue channel is quite bright as it holds a large portion of the information for that section. Where as the bushes are quite dark due to the values being contained in mainly the green channel.  </p>
+<h2>Segmentation of images</h2>
+<hr/>
+<p>Segmentation deals with separating the image into regions of interest. 
+Segmentation contains two major sub-fields:</p>
+<p><em>Supervised segmentation</em>: Some prior knowledge, possibly from human input, is used to guide the algorithm.</p>
+<p><em>Unsupervised segmentation</em>: No prior knowledge. These algorithms attempt to subdivide into meaningful regions automatically. The user may be able to tweak settings like number of regions.</p>
+<p>The simplest method would be thresholding, which will be examined in this section.  </p>
+<div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+ <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+ <span class="c1"># importing relevant packages </span>
+ <span class="kn">import</span> <span class="nn">skimage.data</span> <span class="k">as</span> <span class="nn">data</span>
+ <span class="kn">import</span> <span class="nn">skimage.segmentation</span> <span class="k">as</span> <span class="nn">seg</span>
+ <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">filters</span>
+ <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">draw</span>
+ <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">color</span>
+ <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">exposure</span>
+
+ <span class="c1"># useful function when plotting multiple figures</span>
+ <span class="k">def</span> <span class="nf">image_show</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
+
+ <span class="c1"># loading sample image</span>
+ <span class="n">text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">page</span><span class="p">()</span>
+ <span class="n">image_show</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+</pre></div>
+<p><img alt="threshold text" src="/img/thresh_pic.png" style="width: 1094px; height: auto; max-width: 100%;"/> </p>
+<p>The values of the array can be unraveled to generate a histogram of the individual pixel values. If the image was exposed correctly the distribution may be bimodal allowing us to simply cut-off the lower values. However, this is usually not the case.  </p>
+<p><img alt="histogram" src="/img/hist.png" style="width: 911px; height: auto; max-width: 100%;"/> </p>
+<p>Using supervised segmentation, we could set a cut-off value. This would require trial and error, therefore, a supervised method can be more benficial. In this case the sauvola filter was applied which attempts to set an ideal threshold for every pixel.  </p>
+<p>After examining multiple cut-off values the best supervised thresholding set at 100 produced the following figure:  </p>
+<p><img alt="supervised" src="/img/supervised.png" style="width: 1487px; height: auto; max-width: 100%;"/> </p>
+<p>Clearly there is room for improvement. By using the sauvola filter in sckit-image pakage, the following image was obtained.  </p>
+<p><img alt="unsupervised" src="/img/unsupervised.png" style="width: 1489px; height: auto; max-width: 100%;"/> </p>
+<p>The choice of an appropriate filter had a substantial impact on the information retained in this image in comparision to the supervised method.</p>
+<h2>Conclusions</h2>
+<hr/>
+<p>python can be used as a powerful tool in the anaylsis of images, in particular with the inclusion of the filters and attributes in the scipy and sckit-image modules. </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://linkedin.com/in/kieran-mcauley"><i class="fa fa-linkedin-square fa-lg"></i> Linkedin</a></li>
+    <li class="list-group-item"><a href="https://github.com/k-mcauley"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group " id="tags">
+    <li class="list-group-item tag-1">
+      <a href="/tag/python">python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/jupyter-notebook">jupyter notebook</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/pandas">pandas</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/cellular-automata">cellular automata</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/sckit-image">sckit-image</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/scipy">scipy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/image-analysis">image analysis</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/data-analysis">data analysis</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="https://aapm.org" target="_blank">AAPM</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://iapm.ie/" target="_blank">IAPM</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2020 Kieran McAuley
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>

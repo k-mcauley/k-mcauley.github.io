@@ -1,6 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Trainee Projects - blogging</title><link href="/" rel="alternate"></link><link href="/feeds/blogging.atom.xml" rel="self"></link><id>/</id><updated>2020-04-14T00:00:00+01:00</updated><entry><title>Data Analysis with pandas</title><link href="/articles/2020/04/14/data-analysis-with-pandas/" rel="alternate"></link><published>2020-04-14T00:00:00+01:00</published><updated>2020-04-14T00:00:00+01:00</updated><author><name>Kieran McAuley</name></author><id>tag:None,2020-04-14:/articles/2020/04/14/data-analysis-with-pandas/</id><summary type="html">&lt;h1&gt;Introduction to Data Analysis with pandas&lt;/h1&gt;
-&lt;p&gt;To become familiarised with the &lt;strong&gt;pandas library&lt;/strong&gt; for use in analysis of data I undertook this small project. As most data seen clinically from previous reports and new dose monitoring software will collate data in a &lt;em&gt;.csv&lt;/em&gt; or &lt;em&gt;.dat&lt;/em&gt; file, I examined methods of …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Introduction to Data Analysis with pandas&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Kieran's website - blogging</title><link href="/" rel="alternate"></link><link href="/feeds/blogging.atom.xml" rel="self"></link><id>/</id><updated>2020-04-20T00:00:00+01:00</updated><entry><title>Image Analysis</title><link href="/articles/2020/04/20/image-analysis/" rel="alternate"></link><published>2020-04-20T00:00:00+01:00</published><updated>2020-04-20T00:00:00+01:00</updated><author><name>Kieran McAuley</name></author><id>tag:None,2020-04-20:/articles/2020/04/20/image-analysis/</id><summary type="html">&lt;h1&gt;&lt;code&gt;Image Analysis using scipy and scikit-image&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. &lt;/p&gt;
+&lt;h2&gt;Images as numpy arrays&lt;/h2&gt;
+&lt;p&gt;Images are represented in &lt;code&gt;scikit-image&lt;/code&gt; using standard &lt;code&gt;numpy&lt;/code&gt; arrays. This allows maximum inter-operability with …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;&lt;code&gt;Image Analysis using scipy and scikit-image&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. &lt;/p&gt;
+&lt;h2&gt;Images as numpy arrays&lt;/h2&gt;
+&lt;p&gt;Images are represented in &lt;code&gt;scikit-image&lt;/code&gt; using standard &lt;code&gt;numpy&lt;/code&gt; arrays. This allows maximum inter-operability with other python libraries such as, &lt;code&gt;matplotlib&lt;/code&gt; and &lt;code&gt;scipy&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A standard color image is a 3D array, where the last dimension has a size of 3 and contains information on the images red, grenn and blue channels (RGB). The following exmaple uses a sample image from the sckit-image module to demonstrate the attributes of an image array.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="p"&gt;:::&lt;/span&gt;&lt;span class="n"&gt;python3&lt;/span&gt;
+ &lt;span class="c1"&gt;# loading standard libraries&lt;/span&gt;
+ &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+ &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;matplotlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;
+ &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;skimage&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;
+
+ &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;chelsea&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+ &lt;span class="c1"&gt;# obtain the image dimensions &lt;/span&gt;
+ &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Shape:"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="kp"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="c1"&gt;#obtaining the maximum array values&lt;/span&gt;
+ &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Values min/max:"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="kp"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="kp"&gt;max&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+ &lt;span class="c1"&gt;# in python we can manipulate the values of the image arrays&lt;/span&gt;
+ &lt;span class="c1"&gt;# here a square portion is defined using the row and column co-ordinates of the image&lt;/span&gt;
+ &lt;span class="c1"&gt;# and the channel data is replaced with the darkest red shade available &lt;/span&gt;
+ &lt;span class="c1"&gt;# while setting the green and bluw values to zero&lt;/span&gt;
+ &lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;110&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;110&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;:]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# [red, green, blue]&lt;/span&gt;
+ &lt;span class="c1"&gt;# show the image array&lt;/span&gt;
+ &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;imshow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The output of this code describes:&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;shape&lt;/strong&gt; of the 3D array, we can inspect the number of rows and columns, as well as the number of color channels. Some image formats can contain additional channel filter data i.e infrared, etc. producing greater values.
+Shape: (300, 451, 3)&lt;/p&gt;
+&lt;p&gt;There exist different conventions for representing image values, the most common are:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Float64&lt;/em&gt;: where  0 is black, 255 is white (0-255)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;uint8&lt;/em&gt;: where  0 is black, 1 is white (0-1)&lt;/p&gt;
+&lt;p&gt;Scipy allows any data-type as input, as long as the range is correct (&lt;strong&gt;0-1&lt;/strong&gt; for floating point images, &lt;strong&gt;0-255&lt;/strong&gt; for unsigned bytes, &lt;strong&gt;0-65535&lt;/strong&gt; for unsigned 16-bit integers).&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;range&lt;/strong&gt; of values contained in this image were found to be: 
+Values min/max: 0, 231
+It is clear this image was imput as an float64 data type,this could be easily converted if required.&lt;/p&gt;
+&lt;p&gt;The resulting plot is displyed below:  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="cat" src="/img/cat.png" style="width: 490px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
+&lt;h2&gt;Separation of color channels&lt;/h2&gt;
+&lt;hr/&gt;
+&lt;p&gt;Using another sample image the separation of color can be performed quite simply, this may be useful in assessing the different channels of irraiated film using a pyton code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;imread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'../images/Bells-Beach.jpg'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+ &lt;span class="c1"&gt;# each color channel assigned to a different variable&lt;/span&gt;
+
+ &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="p"&gt;:,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# 0 channel is red&lt;/span&gt;
+ &lt;span class="c1"&gt;# ... operator in array grabs all values until final array dimension&lt;/span&gt;
+ &lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# 1 is green&lt;/span&gt;
+ &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# 2 is blue&lt;/span&gt;
+
+ &lt;span class="c1"&gt;# plotting the image and r, g, b channels&lt;/span&gt;
+ &lt;span class="c1"&gt;# setting figure size &lt;/span&gt;
+ &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+ &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;axes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+ &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'off'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+ &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ax_r&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax_g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax_b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax_color&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;axes&lt;/span&gt;
+
+ &lt;span class="c1"&gt;# set image to grey scale to view color dependency&lt;/span&gt;
+ &lt;span class="n"&gt;ax_r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;imshow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'gray'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="n"&gt;ax_r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'red channel'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+ &lt;span class="n"&gt;ax_g&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;imshow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'gray'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="n"&gt;ax_g&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'green channel'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+ &lt;span class="n"&gt;ax_b&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;imshow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'gray'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="n"&gt;ax_b&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'blue channel'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+ &lt;span class="c1"&gt;# stack the R, G, and B layers using a numpy attribute&lt;/span&gt;
+ &lt;span class="n"&gt;ax_color&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;imshow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+ &lt;span class="n"&gt;ax_color&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'all channels'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The resulting plots are displayed below:  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="separation" src="/img/separation.png" style="width: 1210px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
+&lt;p&gt;The lighter the areas in the individual images represent areas with the highest value for the corresponding channel. For example, the sea in the blue channel is quite bright as it holds a large portion of the information for that section. Where as the bushes are quite dark due to the values being contained in mainly the green channel.  &lt;/p&gt;
+&lt;h2&gt;Segmentation of images&lt;/h2&gt;
+&lt;hr/&gt;
+&lt;p&gt;Segmentation deals with separating the image into regions of interest. 
+Segmentation contains two major sub-fields:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Supervised segmentation&lt;/em&gt;: Some prior knowledge, possibly from human input, is used to guide the algorithm.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Unsupervised segmentation&lt;/em&gt;: No prior knowledge. These algorithms attempt to subdivide into meaningful regions automatically. The user may be able to tweak settings like number of regions.&lt;/p&gt;
+&lt;p&gt;The simplest method would be thresholding, which will be examined in this section.  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+ &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
+
+ &lt;span class="c1"&gt;# importing relevant packages &lt;/span&gt;
+ &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;skimage.data&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;data&lt;/span&gt;
+ &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;skimage.segmentation&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;seg&lt;/span&gt;
+ &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;skimage&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;filters&lt;/span&gt;
+ &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;skimage&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;draw&lt;/span&gt;
+ &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;skimage&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;color&lt;/span&gt;
+ &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;skimage&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;exposure&lt;/span&gt;
+
+ &lt;span class="c1"&gt;# useful function when plotting multiple figures&lt;/span&gt;
+ &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;image_show&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nrows&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ncols&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'gray'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nrows&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;nrows&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ncols&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ncols&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;imshow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'gray'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'off'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt;
+
+ &lt;span class="c1"&gt;# loading sample image&lt;/span&gt;
+ &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+ &lt;span class="n"&gt;image_show&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img alt="threshold text" src="/img/thresh_pic.png" style="width: 1094px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
+&lt;p&gt;The values of the array can be unraveled to generate a histogram of the individual pixel values. If the image was exposed correctly the distribution may be bimodal allowing us to simply cut-off the lower values. However, this is usually not the case.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="histogram" src="/img/hist.png" style="width: 911px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
+&lt;p&gt;Using supervised segmentation, we could set a cut-off value. This would require trial and error, therefore, a supervised method can be more benficial. In this case the sauvola filter was applied which attempts to set an ideal threshold for every pixel.  &lt;/p&gt;
+&lt;p&gt;After examining multiple cut-off values the best supervised thresholding set at 100 produced the following figure:  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="supervised" src="/img/supervised.png" style="width: 1487px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
+&lt;p&gt;Clearly there is room for improvement. By using the sauvola filter in sckit-image pakage, the following image was obtained.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="unsupervised" src="/img/unsupervised.png" style="width: 1489px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
+&lt;p&gt;The choice of an appropriate filter had a substantial impact on the information retained in this image in comparision to the supervised method.&lt;/p&gt;
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+&lt;hr/&gt;
+&lt;p&gt;python can be used as a powerful tool in the anaylsis of images, in particular with the inclusion of the filters and attributes in the scipy and sckit-image modules. &lt;/p&gt;</content><category term="blogging"></category><category term="sckit-image"></category><category term="scipy"></category><category term="image analysis"></category><category term="python"></category></entry><entry><title>Data Analysis with pandas</title><link href="/articles/2020/04/14/data-analysis-with-pandas/" rel="alternate"></link><published>2020-04-14T00:00:00+01:00</published><updated>2020-04-14T00:00:00+01:00</updated><author><name>Kieran McAuley</name></author><id>tag:None,2020-04-14:/articles/2020/04/14/data-analysis-with-pandas/</id><summary type="html">&lt;h1&gt;&lt;code&gt;Introduction to Data Analysis with pandas&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;To become familiarised with the &lt;strong&gt;pandas library&lt;/strong&gt; for use in analysis of data I undertook this small project. As most data seen clinically from previous reports and new dose monitoring software will collate data in a &lt;em&gt;.csv&lt;/em&gt; or &lt;em&gt;.dat&lt;/em&gt; file, I examined methods of …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;&lt;code&gt;Introduction to Data Analysis with pandas&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;To become familiarised with the &lt;strong&gt;pandas library&lt;/strong&gt; for use in analysis of data I undertook this small project. As most data seen clinically from previous reports and new dose monitoring software will collate data in a &lt;em&gt;.csv&lt;/em&gt; or &lt;em&gt;.dat&lt;/em&gt; file, I examined methods of pulling this data to python utilising pandas. &lt;/p&gt;
 &lt;h2&gt;Formatting data&lt;/h2&gt;
 &lt;hr/&gt;
@@ -131,28 +249,4 @@
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blogging"></category><category term="pandas"></category><category term="data analysis"></category><category term="python"></category></entry><entry><title>Markdown Examples Part 3</title><link href="/articles/2020/04/03/markdown-examples-part-3/" rel="alternate"></link><published>2020-04-03T00:00:00+01:00</published><updated>2020-04-03T00:00:00+01:00</updated><author><name>Kieran McAuley</name></author><id>tag:None,2020-04-03:/articles/2020/04/03/markdown-examples-part-3/</id><summary type="html">&lt;p&gt;Code blocks are preceeded by an indent, three : symbols and the name of the language.&lt;br/&gt;
-All of the following code will be highlighted while the text is indented.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;do_twice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper_do_twice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper_do_twice&lt;/span&gt;
-
-&lt;span class="nd"&gt;@do_twice&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;say_whee&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;some_text&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;some_text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Whee …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Code blocks are preceeded by an indent, three : symbols and the name of the language.&lt;br/&gt;
-All of the following code will be highlighted while the text is indented.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;do_twice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper_do_twice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper_do_twice&lt;/span&gt;
-
-&lt;span class="nd"&gt;@do_twice&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;say_whee&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;some_text&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;some_text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Whee!'&lt;/span&gt;
-&lt;span class="n"&gt;say_whee&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="blogging"></category><category term="markdown"></category><category term="pygments"></category></entry></feed>
+&lt;/script&gt;</content><category term="blogging"></category><category term="pandas"></category><category term="data analysis"></category><category term="python"></category></entry></feed>
