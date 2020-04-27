@@ -177,13 +177,13 @@ init_mathjax();
 
         <meta name="author" content="Kieran McAuley" />
         <meta name="keywords" content="sckit-image,scipy,image analysis,python" />
-        <meta name="description" content="Image Analysis using scipy and scikit-image In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. Images as numpy arrays Images are represented in scikit-image using standard numpy arrays. This allows maximum inter-operability with …" />
+        <meta name="description" content="Image Analysis using scipy and scikit-image In this post, I examine the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. Images as numpy arrays Images are represented in scikit-image using standard numpy arrays. This allows maximum inter-operability with other …" />
 
         <meta property="og:site_name" content="Kieran's website" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Image Analysis"/>
         <meta property="og:url" content="/articles/2020/04/20/image-analysis/"/>
-        <meta property="og:description" content="Image Analysis using scipy and scikit-image In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. Images as numpy arrays Images are represented in scikit-image using standard numpy arrays. This allows maximum inter-operability with …"/>
+        <meta property="og:description" content="Image Analysis using scipy and scikit-image In this post, I examine the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. Images as numpy arrays Images are represented in scikit-image using standard numpy arrays. This allows maximum inter-operability with other …"/>
         <meta property="article:published_time" content="2020-04-20" />
             <meta property="article:section" content="blogging" />
             <meta property="article:tag" content="sckit-image" />
@@ -289,10 +289,10 @@ Kieran's website            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <h1><code>Image Analysis using scipy and scikit-image</code></h1>
-<p>In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. </p>
+<p>In this post, I examine the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. </p>
 <h2>Images as numpy arrays</h2>
 <p>Images are represented in <code>scikit-image</code> using standard <code>numpy</code> arrays. This allows maximum inter-operability with other python libraries such as, <code>matplotlib</code> and <code>scipy</code>.</p>
-<p>A standard color image is a 3D array, where the last dimension has a size of 3 and contains information on the images red, grenn and blue channels (RGB). The following exmaple uses a sample image from the sckit-image module to demonstrate the attributes of an image array.</p>
+<p>A standard color image is just a 3D array, where the last dimension has a size of 3 and contains information on the images red, green and blue channels (RGB). The following example uses a sample image from the sckit-image module to demonstrate the attributes of an image array.</p>
 <div class="highlight"><pre><span></span>  <span class="p">:::</span><span class="n">python3</span>
  <span class="c1"># loading standard libraries</span>
  <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -308,26 +308,27 @@ Kieran's website            </a>
  <span class="c1"># in python we can manipulate the values of the image arrays</span>
  <span class="c1"># here a square portion is defined using the row and column co-ordinates of the image</span>
  <span class="c1"># and the channel data is replaced with the darkest red shade available </span>
- <span class="c1"># while setting the green and bluw values to zero</span>
+ <span class="c1"># while setting the green and blue values to zero</span>
  <span class="n">cat</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">110</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">110</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># [red, green, blue]</span>
  <span class="c1"># show the image array</span>
  <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cat</span><span class="p">);</span>
 </pre></div>
 <p>The output of this code describes:</p>
-<p>The <strong>shape</strong> of the 3D array, we can inspect the number of rows and columns, as well as the number of color channels. Some image formats can contain additional channel filter data i.e infrared, etc. producing greater values.
-Shape: (300, 451, 3)</p>
+<p>The <strong>shape</strong> of the 3D array<br/>
+we can inspect the number of rows and columns, as well as the number of color channels. Some image formats can contain additional channel filter data i.e. infrared, etc.  </p>
+<p><strong>Shape: (300, 451, 3)</strong></p>
 <p>There exist different conventions for representing image values, the most common are:</p>
 <p><em>Float64</em>: where  0 is black, 255 is white (0-255)</p>
 <p><em>uint8</em>: where  0 is black, 1 is white (0-1)</p>
 <p>Scipy allows any data-type as input, as long as the range is correct (<strong>0-1</strong> for floating point images, <strong>0-255</strong> for unsigned bytes, <strong>0-65535</strong> for unsigned 16-bit integers).</p>
-<p>The <strong>range</strong> of values contained in this image were found to be: 
-Values min/max: 0, 231
-It is clear this image was imput as an float64 data type,this could be easily converted if required.</p>
-<p>The resulting plot is displyed below:  </p>
+<p>The <strong>range</strong> of values contained in this image were found to be:  </p>
+<p><strong>Values min/max: (0, 231)</strong></p>
+<p>It is clear this image was input as an float64 data type,this could be easily converted if required.</p>
+<p>The resulting plot is displayed below:  </p>
 <p><img alt="cat" src="/img/cat.png" style="width: 490px; height: auto; max-width: 100%;"/> </p>
 <h2>Separation of color channels</h2>
 <hr/>
-<p>Using another sample image the separation of color can be performed quite simply, this may be useful in assessing the different channels of irraiated film using a pyton code.</p>
+<p>Using another sample image the separation of color data can be performed quite simply, this may be useful in assessing the different channels of irradiated film using python.</p>
 <div class="highlight"><pre><span></span> <span class="n">image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">'../images/Bells-Beach.jpg'</span><span class="p">)</span>
 
  <span class="c1"># each color channel assigned to a different variable</span>
@@ -365,8 +366,8 @@ It is clear this image was imput as an float64 data type,this could be easily co
 <p>The lighter the areas in the individual images represent areas with the highest value for the corresponding channel. For example, the sea in the blue channel is quite bright as it holds a large portion of the information for that section. Where as the bushes are quite dark due to the values being contained in mainly the green channel.  </p>
 <h2>Segmentation of images</h2>
 <hr/>
-<p>Segmentation deals with separating the image into regions of interest. 
-Segmentation contains two major sub-fields:</p>
+<p>Segmentation deals with separating the image into regions of interest.  </p>
+<p>Segmentation contains two major sub-fields:</p>
 <p><em>Supervised segmentation</em>: Some prior knowledge, possibly from human input, is used to guide the algorithm.</p>
 <p><em>Unsupervised segmentation</em>: No prior knowledge. These algorithms attempt to subdivide into meaningful regions automatically. The user may be able to tweak settings like number of regions.</p>
 <p>The simplest method would be thresholding, which will be examined in this section.  </p>
@@ -395,12 +396,12 @@ Segmentation contains two major sub-fields:</p>
 <p><img alt="threshold text" src="/img/thresh_pic.png" style="width: 1094px; height: auto; max-width: 100%;"/> </p>
 <p>The values of the array can be unraveled to generate a histogram of the individual pixel values. If the image was exposed correctly the distribution may be bimodal allowing us to simply cut-off the lower values. However, this is usually not the case.  </p>
 <p><img alt="histogram" src="/img/hist.png" style="width: 911px; height: auto; max-width: 100%;"/> </p>
-<p>Using supervised segmentation, we could set a cut-off value. This would require trial and error, therefore, a supervised method can be more benficial. In this case the sauvola filter was applied which attempts to set an ideal threshold for every pixel.  </p>
+<p>Using supervised segmentation, we could set a cut-off value. This would require trial and error, therefore, a supervised method can be more beneficial. In this case the sauvola filter was applied which attempts to set an ideal threshold for every pixel.  </p>
 <p>After examining multiple cut-off values the best supervised thresholding set at 100 produced the following figure:  </p>
 <p><img alt="supervised" src="/img/supervised.png" style="width: 1487px; height: auto; max-width: 100%;"/> </p>
-<p>Clearly there is room for improvement. By using the sauvola filter in sckit-image pakage, the following image was obtained.  </p>
+<p>Clearly there is room for improvement. By using the sauvola filter in sckit-image package, the following image was obtained.  </p>
 <p><img alt="unsupervised" src="/img/unsupervised.png" style="width: 1489px; height: auto; max-width: 100%;"/> </p>
-<p>The choice of an appropriate filter had a substantial impact on the information retained in this image in comparision to the supervised method.</p>
+<p>The choice of an appropriate filter had a substantial impact on the information retained in this image in comparison to the supervised method.</p>
 <h2>Conclusions</h2>
 <hr/>
 <p>python can be used as a powerful tool in the anaylsis of images, in particular with the inclusion of the filters and attributes in the scipy and sckit-image modules. </p>
@@ -434,22 +435,25 @@ Segmentation contains two major sub-fields:</p>
       <a href="/tag/python">python</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/jupyter-notebook">jupyter notebook</a>
+      <a href="/tag/annotation">annotation</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/pandas">pandas</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/cellular-automata">cellular automata</a>
+      <a href="/tag/image-analysis">image analysis</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/sckit-image">sckit-image</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/scipy">scipy</a>
+      <a href="/tag/cellular-automata">cellular automata</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/image-analysis">image analysis</a>
+      <a href="/tag/jupyter-notebook">jupyter notebook</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/scipy">scipy</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/data-analysis">data analysis</a>

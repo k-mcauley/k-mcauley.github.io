@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Kieran's website - blogging</title><link href="/" rel="alternate"></link><link href="/feeds/blogging.atom.xml" rel="self"></link><id>/</id><updated>2020-04-20T00:00:00+01:00</updated><entry><title>Image Analysis</title><link href="/articles/2020/04/20/image-analysis/" rel="alternate"></link><published>2020-04-20T00:00:00+01:00</published><updated>2020-04-20T00:00:00+01:00</updated><author><name>Kieran McAuley</name></author><id>tag:None,2020-04-20:/articles/2020/04/20/image-analysis/</id><summary type="html">&lt;h1&gt;&lt;code&gt;Image Analysis using scipy and scikit-image&lt;/code&gt;&lt;/h1&gt;
-&lt;p&gt;In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. &lt;/p&gt;
+&lt;p&gt;In this post, I examine the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. &lt;/p&gt;
 &lt;h2&gt;Images as numpy arrays&lt;/h2&gt;
-&lt;p&gt;Images are represented in &lt;code&gt;scikit-image&lt;/code&gt; using standard &lt;code&gt;numpy&lt;/code&gt; arrays. This allows maximum inter-operability with …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;&lt;code&gt;Image Analysis using scipy and scikit-image&lt;/code&gt;&lt;/h1&gt;
-&lt;p&gt;In this post, I examine the the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. &lt;/p&gt;
+&lt;p&gt;Images are represented in &lt;code&gt;scikit-image&lt;/code&gt; using standard &lt;code&gt;numpy&lt;/code&gt; arrays. This allows maximum inter-operability with other …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;&lt;code&gt;Image Analysis using scipy and scikit-image&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;In this post, I examine the use of scipy and scikit-image for use in image analysis with a focus on its application to scientific data. &lt;/p&gt;
 &lt;h2&gt;Images as numpy arrays&lt;/h2&gt;
 &lt;p&gt;Images are represented in &lt;code&gt;scikit-image&lt;/code&gt; using standard &lt;code&gt;numpy&lt;/code&gt; arrays. This allows maximum inter-operability with other python libraries such as, &lt;code&gt;matplotlib&lt;/code&gt; and &lt;code&gt;scipy&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;A standard color image is a 3D array, where the last dimension has a size of 3 and contains information on the images red, grenn and blue channels (RGB). The following exmaple uses a sample image from the sckit-image module to demonstrate the attributes of an image array.&lt;/p&gt;
+&lt;p&gt;A standard color image is just a 3D array, where the last dimension has a size of 3 and contains information on the images red, green and blue channels (RGB). The following example uses a sample image from the sckit-image module to demonstrate the attributes of an image array.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="p"&gt;:::&lt;/span&gt;&lt;span class="n"&gt;python3&lt;/span&gt;
  &lt;span class="c1"&gt;# loading standard libraries&lt;/span&gt;
  &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
@@ -22,26 +22,27 @@
  &lt;span class="c1"&gt;# in python we can manipulate the values of the image arrays&lt;/span&gt;
  &lt;span class="c1"&gt;# here a square portion is defined using the row and column co-ordinates of the image&lt;/span&gt;
  &lt;span class="c1"&gt;# and the channel data is replaced with the darkest red shade available &lt;/span&gt;
- &lt;span class="c1"&gt;# while setting the green and bluw values to zero&lt;/span&gt;
+ &lt;span class="c1"&gt;# while setting the green and blue values to zero&lt;/span&gt;
  &lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;110&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;110&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;:]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# [red, green, blue]&lt;/span&gt;
  &lt;span class="c1"&gt;# show the image array&lt;/span&gt;
  &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;imshow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The output of this code describes:&lt;/p&gt;
-&lt;p&gt;The &lt;strong&gt;shape&lt;/strong&gt; of the 3D array, we can inspect the number of rows and columns, as well as the number of color channels. Some image formats can contain additional channel filter data i.e infrared, etc. producing greater values.
-Shape: (300, 451, 3)&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;shape&lt;/strong&gt; of the 3D array&lt;br/&gt;
+we can inspect the number of rows and columns, as well as the number of color channels. Some image formats can contain additional channel filter data i.e. infrared, etc.  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Shape: (300, 451, 3)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;There exist different conventions for representing image values, the most common are:&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Float64&lt;/em&gt;: where  0 is black, 255 is white (0-255)&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;uint8&lt;/em&gt;: where  0 is black, 1 is white (0-1)&lt;/p&gt;
 &lt;p&gt;Scipy allows any data-type as input, as long as the range is correct (&lt;strong&gt;0-1&lt;/strong&gt; for floating point images, &lt;strong&gt;0-255&lt;/strong&gt; for unsigned bytes, &lt;strong&gt;0-65535&lt;/strong&gt; for unsigned 16-bit integers).&lt;/p&gt;
-&lt;p&gt;The &lt;strong&gt;range&lt;/strong&gt; of values contained in this image were found to be: 
-Values min/max: 0, 231
-It is clear this image was imput as an float64 data type,this could be easily converted if required.&lt;/p&gt;
-&lt;p&gt;The resulting plot is displyed below:  &lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;range&lt;/strong&gt; of values contained in this image were found to be:  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Values min/max: (0, 231)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;It is clear this image was input as an float64 data type,this could be easily converted if required.&lt;/p&gt;
+&lt;p&gt;The resulting plot is displayed below:  &lt;/p&gt;
 &lt;p&gt;&lt;img alt="cat" src="/img/cat.png" style="width: 490px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
 &lt;h2&gt;Separation of color channels&lt;/h2&gt;
 &lt;hr/&gt;
-&lt;p&gt;Using another sample image the separation of color can be performed quite simply, this may be useful in assessing the different channels of irraiated film using a pyton code.&lt;/p&gt;
+&lt;p&gt;Using another sample image the separation of color data can be performed quite simply, this may be useful in assessing the different channels of irradiated film using python.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;imread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'../images/Bells-Beach.jpg'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
  &lt;span class="c1"&gt;# each color channel assigned to a different variable&lt;/span&gt;
@@ -79,8 +80,8 @@ It is clear this image was imput as an float64 data type,this could be easily co
 &lt;p&gt;The lighter the areas in the individual images represent areas with the highest value for the corresponding channel. For example, the sea in the blue channel is quite bright as it holds a large portion of the information for that section. Where as the bushes are quite dark due to the values being contained in mainly the green channel.  &lt;/p&gt;
 &lt;h2&gt;Segmentation of images&lt;/h2&gt;
 &lt;hr/&gt;
-&lt;p&gt;Segmentation deals with separating the image into regions of interest. 
-Segmentation contains two major sub-fields:&lt;/p&gt;
+&lt;p&gt;Segmentation deals with separating the image into regions of interest.  &lt;/p&gt;
+&lt;p&gt;Segmentation contains two major sub-fields:&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Supervised segmentation&lt;/em&gt;: Some prior knowledge, possibly from human input, is used to guide the algorithm.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Unsupervised segmentation&lt;/em&gt;: No prior knowledge. These algorithms attempt to subdivide into meaningful regions automatically. The user may be able to tweak settings like number of regions.&lt;/p&gt;
 &lt;p&gt;The simplest method would be thresholding, which will be examined in this section.  &lt;/p&gt;
@@ -109,12 +110,12 @@ Segmentation contains two major sub-fields:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="threshold text" src="/img/thresh_pic.png" style="width: 1094px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
 &lt;p&gt;The values of the array can be unraveled to generate a histogram of the individual pixel values. If the image was exposed correctly the distribution may be bimodal allowing us to simply cut-off the lower values. However, this is usually not the case.  &lt;/p&gt;
 &lt;p&gt;&lt;img alt="histogram" src="/img/hist.png" style="width: 911px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
-&lt;p&gt;Using supervised segmentation, we could set a cut-off value. This would require trial and error, therefore, a supervised method can be more benficial. In this case the sauvola filter was applied which attempts to set an ideal threshold for every pixel.  &lt;/p&gt;
+&lt;p&gt;Using supervised segmentation, we could set a cut-off value. This would require trial and error, therefore, a supervised method can be more beneficial. In this case the sauvola filter was applied which attempts to set an ideal threshold for every pixel.  &lt;/p&gt;
 &lt;p&gt;After examining multiple cut-off values the best supervised thresholding set at 100 produced the following figure:  &lt;/p&gt;
 &lt;p&gt;&lt;img alt="supervised" src="/img/supervised.png" style="width: 1487px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
-&lt;p&gt;Clearly there is room for improvement. By using the sauvola filter in sckit-image pakage, the following image was obtained.  &lt;/p&gt;
+&lt;p&gt;Clearly there is room for improvement. By using the sauvola filter in sckit-image package, the following image was obtained.  &lt;/p&gt;
 &lt;p&gt;&lt;img alt="unsupervised" src="/img/unsupervised.png" style="width: 1489px; height: auto; max-width: 100%;"/&gt; &lt;/p&gt;
-&lt;p&gt;The choice of an appropriate filter had a substantial impact on the information retained in this image in comparision to the supervised method.&lt;/p&gt;
+&lt;p&gt;The choice of an appropriate filter had a substantial impact on the information retained in this image in comparison to the supervised method.&lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;hr/&gt;
 &lt;p&gt;python can be used as a powerful tool in the anaylsis of images, in particular with the inclusion of the filters and attributes in the scipy and sckit-image modules. &lt;/p&gt;</content><category term="blogging"></category><category term="sckit-image"></category><category term="scipy"></category><category term="image analysis"></category><category term="python"></category></entry><entry><title>Data Analysis with pandas</title><link href="/articles/2020/04/14/data-analysis-with-pandas/" rel="alternate"></link><published>2020-04-14T00:00:00+01:00</published><updated>2020-04-14T00:00:00+01:00</updated><author><name>Kieran McAuley</name></author><id>tag:None,2020-04-14:/articles/2020/04/14/data-analysis-with-pandas/</id><summary type="html">&lt;h1&gt;&lt;code&gt;Introduction to Data Analysis with pandas&lt;/code&gt;&lt;/h1&gt;
@@ -186,7 +187,7 @@ Segmentation contains two major sub-fields:&lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;hr/&gt;
 &lt;p&gt;The above data all appear to show a local increase of the average temperatures by year and decade. This would be expected, as we know there is a global increase in the average temperatures observed worldwide.&lt;/p&gt;
-&lt;p&gt;The use of python in selection and manipulation in this data analysis was quite simple and removed the need for manual manipulation of data compared to another available software. Although the &lt;em&gt;annotation module&lt;/em&gt; commonly used to annotate figures can be difficult to implement and may produce large blocks of code, the results are markedly better than what can be achivived in programs such as &lt;strong&gt;Excel&lt;/strong&gt;. &lt;/p&gt;
+&lt;p&gt;The use of python in selection and manipulation in this data analysis was quite simple and removed the need for manual manipulation of data compared to another available software. Although the &lt;em&gt;annotation module&lt;/em&gt; commonly used to annotate figures can be difficult to implement and may produce large blocks of code, the results are markedly better than what can be achieved in programs such as &lt;strong&gt;Excel&lt;/strong&gt;. &lt;/p&gt;
 &lt;p&gt;Future work to improve this analysis should examine areas such as error analysis with python and further annotation examples. &lt;/p&gt;
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
@@ -249,4 +250,4 @@ Segmentation contains two major sub-fields:&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blogging"></category><category term="pandas"></category><category term="data analysis"></category><category term="python"></category></entry></feed>
+&lt;/script&gt;</content><category term="blogging"></category><category term="pandas"></category><category term="data analysis"></category><category term="python"></category><category term="annotation"></category></entry></feed>
